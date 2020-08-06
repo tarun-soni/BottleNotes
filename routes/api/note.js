@@ -74,7 +74,7 @@ router.get('/notes/:user_id', auth, async (req, res) => {
 
 
 // @route       put api/note/:note_id
-// @desc        edit specific
+// @desc        edit specific note
 // @access      private
 router.put('/:note_id', auth, async (req, res) => {
   try {
@@ -100,5 +100,32 @@ router.put('/:note_id', auth, async (req, res) => {
 )
 
 
+
+// @route       DELETE api/note/:note_id
+// @desc        delete specific note
+// @access      private
+router.delete('/:note_id', auth, async (req, res) => {
+
+  try {
+    const note = await Notes.findOne({ user: req.user.id });
+
+
+    console.log('note.notes :>> ', note.notes);
+    note.notes = note.notes.filter(
+      n => n._id.toString() !== req.params.note_id
+    );
+
+    await note.save()
+
+    return res.json({ msg: 'Note Removed' })
+  } catch (err) {
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Note not found' })
+    }
+    console.error('error in route post delete note ', err);
+    res.status(500).send('Server error');
+  }
+
+});
 
 module.exports = router;
