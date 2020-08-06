@@ -24,7 +24,19 @@ router.post('/',
 
     const newNote = { title, desc }
     try {
-      const notes = await Notes.findOne({ user: req.user.id })
+      let notes = await Notes.findOne({ user: req.user.id })
+      console.log('notes :>> ', notes);
+
+      if (notes === null) {
+
+        notes = new Notes({
+          user: req.user.id,
+          notes: newNote,
+        })
+        await notes.save();
+        return res.json(notes)
+      }
+
       notes.notes.unshift(newNote);
       await notes.save()
       return res.json(notes);
@@ -36,7 +48,7 @@ router.post('/',
 );
 
 
-//@route       GET api/notes/user/:user_id
+//@route       GET api/note/notes/user/:user_id
 //@desc        get notes by user id
 //@access      private
 router.get('/notes/:user_id', auth, async (req, res) => {
@@ -58,6 +70,35 @@ router.get('/notes/:user_id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 })
+
+
+
+// @route       put api/note/:note_id
+// @desc        edit specific
+// @access      private
+router.put('/:note_id', auth, async (req, res) => {
+  try {
+    const notes = await Notes.findOne({ user: req.user.id })
+
+    //Find index of specific object using findIndex method.    
+    objIndex = notes.notes.findIndex((obj => obj._id == req.params.note_id));
+
+
+    //Update object's name property.
+    notes.notes[objIndex].title = req.body.title
+    notes.notes[objIndex].desc = req.body.desc
+
+    await notes.save()
+
+    res.json(notes);
+
+  } catch (err) {
+    console.error('error in note put route: note/noteid >>>>>', err)
+    res.status(500).send('Server Error');
+  }
+}
+)
+
 
 
 module.exports = router;
