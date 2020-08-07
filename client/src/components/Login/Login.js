@@ -1,25 +1,61 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { Link, Redirect } from 'react-router-dom'
 
 import './cssLogin.css'
 
-const Login = props => {
+import { connect } from 'react-redux'
+import { login } from '../../actions/auth'
+import { useDispatch } from 'react-redux'
+
+const Login = ({ isAuthenticated }) => {
+  const dispatch = useDispatch()
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+
+  const { email, password } = formData
+  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onSubmit = async e => {
+    e.preventDefault();
+    console.log('formData :>> ', formData);
+
+    dispatch(login(formData))
+  }
+  if (isAuthenticated) {
+    return <Redirect to="/notes" />;
+  }
+
+
   return (
     <>
       <div className="container">
-        <form>
+        <form onSubmit={e => onSubmit(e)}>
           <div className="form-control">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              value={email}
+              onChange={e => onChange(e)}
+            />
           </div>
 
           <div className="form-control">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              minLength="6"
+              value={password}
+              onChange={e => onChange(e)}
+            />
           </div>
-
-          <button className="btn">Log In</button>
-
+          <input type="submit" className="btn" value="Log In" />
           <small>Don't have an account? <a href="#">Sign up</a></small>
         </form>
         <div className="features">
@@ -30,7 +66,7 @@ const Login = props => {
           </div>
           <div className="feature">
             <i className="fa fa-check-circle" aria-hidden="true"></i>
-            <h3>Login</h3>
+            <h3>Sign up and Login</h3>
             <p>Login to see and edit all notes.</p>
           </div>
 
@@ -39,9 +75,12 @@ const Login = props => {
     </>
   )
 }
-
 Login.propTypes = {
+  isAuthenticated: PropTypes.bool
+};
 
-}
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-export default Login
+export default connect(mapStateToProps)(Login);

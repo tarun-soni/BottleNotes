@@ -51,9 +51,9 @@ router.post('/',
 //@route       GET api/note/notes/user/:user_id
 //@desc        get notes by user id
 //@access      private
-router.get('/notes/:user_id', auth, async (req, res) => {
+router.get('/notes', auth, async (req, res) => {
   try {
-    const notes = await Notes.findOne({ user: req.params.user_id })
+    const notes = await Notes.findOne({ user: req.user.id })
       .populate('user', ['name']);
 
     if (!notes) {

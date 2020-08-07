@@ -1,30 +1,35 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 
+import React, { useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { getCurrentUsersNotes } from '../../actions/notes'
 import './cssNotes.css'
-const Notes = props => {
-  return (
-    <>
-      <div class="notes-container">
-        <div class="note">
-          <div class="note-body">
-            <h4>Note title</h4>
-            <p>note desc.</p>
-            <div class="user">
-              <div class="user-info">
-                <h5>username</h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+import NoteItem from './NoteItem'
+const Notes = ({ notes: { note, notes, loading } }) => {
 
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getCurrentUsersNotes())
+
+  }, [getCurrentUsersNotes])
+
+  return (
+
+    <>
+      {loading ? <h1> loading.....</h1> :
+        <>
+          {notes.map(n => (
+            < NoteItem key={n._id} n={n} name={note.user.name} />
+          ))}
+        </>
+      }
     </>
   )
 }
 
-Notes.propTypes = {
 
-}
+const mapStateToProps = state => ({
+  notes: state.notes
+})
 
-export default Notes
+export default connect(mapStateToProps)(Notes)
