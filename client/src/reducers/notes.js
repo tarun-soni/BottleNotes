@@ -3,7 +3,7 @@ import {
   NOTES_ERROR,
   CREATE_NOTE,
   UPDATE_NOTES,
-  NOTE_DELETED
+  DELETE_NOTE
 } from '../actions/types'
 
 const initialState = {
@@ -29,6 +29,18 @@ export default function (state = initialState, action) {
         ...state,
         error: payload,
         loading: false
+      }
+
+    case DELETE_NOTE:
+      return {
+        ...state,
+        notes: {
+          ...state.note,
+          notes: state.notes.filter(
+            n => n._id !== payload
+          )
+        },
+        notes: state.notes
       }
     default:
       return state;

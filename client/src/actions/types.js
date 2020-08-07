@@ -13,4 +13,4 @@ export const GET_NOTES = 'GET_NOTES';
 export const CREATE_NOTE = 'CREATE_NOTE';
 export const NOTES_ERROR = 'NOTES_ERROR';
 export const UPDATE_NOTES = 'UPDATE_NOTES';
-export const NOTE_DELETED = 'NOTE_DELETED';
+export const DELETE_NOTE = 'DELETE_NOTE';

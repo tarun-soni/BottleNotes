@@ -107,8 +107,8 @@ router.put('/:note_id', auth, async (req, res) => {
 router.delete('/:note_id', auth, async (req, res) => {
 
   try {
-    const note = await Notes.findOne({ user: req.user.id });
 
+    const note = await Notes.findOne({ user: req.user.id });
 
     console.log('note.notes :>> ', note.notes);
     note.notes = note.notes.filter(
@@ -117,7 +117,8 @@ router.delete('/:note_id', auth, async (req, res) => {
 
     await note.save()
 
-    return res.json({ msg: 'Note Removed' })
+    // return res.json({ msg: 'Note Removed' })
+    return res.json(note.notes)
   } catch (err) {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ msg: 'Note not found' })

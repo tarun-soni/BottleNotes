@@ -1,7 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { deleteNote } from '../../actions/notes'
 
 const NoteItem = ({ n, name }) => {
+
+  const dispatch = useDispatch()
   return (
     <>
       <div className="notes-container">
@@ -14,6 +18,12 @@ const NoteItem = ({ n, name }) => {
               <div className="user-info">
                 <h5>created by {name}</h5>
               </div>
+
+
+              <i onClick={e =>
+                dispatch(deleteNote(n._id))
+              }
+                className="fa fa-trash" aria-hidden="true"></i>
             </div>
           </div>
         </div>

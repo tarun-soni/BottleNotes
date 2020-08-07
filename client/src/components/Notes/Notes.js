@@ -11,7 +11,7 @@ const Notes = ({ notes: { note, notes, loading } }) => {
   useEffect(() => {
     dispatch(getCurrentUsersNotes())
 
-  }, [getCurrentUsersNotes])
+  }, [getCurrentUsersNotes, notes])
 
   return (
 
@@ -19,7 +19,7 @@ const Notes = ({ notes: { note, notes, loading } }) => {
       {loading ? <h1> loading.....</h1> :
         <>
           {notes.map(n => (
-            < NoteItem key={n._id} n={n} name={note.user.name} />
+            <NoteItem key={n._id} n={n} name={note.user.name} />
           ))}
         </>
       }
