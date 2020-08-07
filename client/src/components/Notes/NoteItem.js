@@ -8,23 +8,21 @@ const NoteItem = ({ n, name }) => {
   const dispatch = useDispatch()
   return (
     <>
-      <div className="notes-container">
 
-        <div className="note">
-          <div className="note-body">
-            <h4>{n.title}</h4>
-            <p>{n.desc}</p>
-            <div className="user">
-              <div className="user-info">
-                <h5>created by {name}</h5>
-              </div>
-
-
-              <i onClick={e =>
-                dispatch(deleteNote(n._id))
-              }
-                className="fa fa-trash" aria-hidden="true"></i>
+      <div className="note">
+        <div className="note-body">
+          <h4>{n.title}</h4>
+          <p>{n.desc}</p>
+          <div className="user">
+            <div className="user-info">
+              <h5>created by {name}</h5>
             </div>
+
+
+            <i onClick={e =>
+              dispatch(deleteNote(n._id))
+            }
+              className="fa fa-trash" aria-hidden="true"></i>
           </div>
         </div>
       </div>

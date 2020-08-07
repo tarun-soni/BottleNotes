@@ -15,15 +15,41 @@ const Notes = ({ notes: { note, notes, loading } }) => {
 
   return (
 
-    <>
-      {loading ? <h1> loading.....</h1> :
-        <>
-          {notes.map(n => (
-            <NoteItem key={n._id} n={n} name={note.user.name} />
-          ))}
-        </>
-      }
-    </>
+    <div className="main">
+
+
+      <form className="inputFields"
+      >
+        <input
+          type="text"
+          placeholder="Title..."
+          name="email"
+        />
+
+
+        <input
+          type="text"
+          placeholder="description"
+          name="password"
+          minLength="6"
+        />
+        <input type="submit" className="btn" value="ADD Note" />
+      </form>
+
+
+      <div className="notes-container">
+
+
+        {loading ? <h1> loading.....</h1> :
+          <>
+            {notes.map(n => (
+              <NoteItem key={n._id} n={n} name={note.user.name} />
+            ))}
+          </>
+        }
+      </div>
+
+    </div>
   )
 }
 

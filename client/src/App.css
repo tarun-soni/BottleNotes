@@ -9,7 +9,7 @@ height: 100vh;
   box-sizing: border-box;
 }
 
-body {
+.App,body {
 	background-color: #f7f8fc;
 	font-family: 'Open Sans', sans-serif;
 	display: flex;
@@ -19,3 +19,37 @@ body {
 	margin: 0;
 }
 
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2rem;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  opacity: 0.9;
+
+}
+
+.navbar ul {
+  display: flex;
+		list-style: none;
+	
+}
+
+.navbar a {
+  color: #fff;
+  padding: 0.45rem;
+  margin: 0 0.25rem;
+}
+
+.navbar a:hover {
+  color: #17a2b8;
+}
+
+.bg-dark{
+  background: #343a40;
+  color: #fff;
+}
