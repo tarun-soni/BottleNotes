@@ -63,11 +63,10 @@
 
 
 .main{
-  margin-top: 450px;
+  margin-top: 130px;
   margin-bottom: 50px;
+  max-height: 75%;
 }
-
-
 
 
 
@@ -85,7 +84,6 @@ padding: 0 250px;
     padding: 0 250px;
   }
   .main{
-    margin-top: 800px;
     justify-content: center;
   }
 
@@ -106,4 +104,3 @@ padding: 0 250px;
   justify-content: space-between;
   padding: 0 40px;
 }
-
