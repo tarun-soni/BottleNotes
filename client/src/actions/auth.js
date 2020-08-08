@@ -4,7 +4,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  CLEAR_NOTES
 } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
@@ -56,3 +57,9 @@ export const loadUser = () => async dispatch => {
     })
   }
 }
+
+//Logout
+export const logout = () => dispatch => {
+  dispatch({ type: CLEAR_NOTES });
+  dispatch({ type: LOGOUT });
+};

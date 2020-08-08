@@ -45,7 +45,7 @@ const Login = ({ isAuthenticated }) => {
           </div>
 
           <div className="form-control">
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               placeholder="Password"

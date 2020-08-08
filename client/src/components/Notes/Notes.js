@@ -10,7 +10,6 @@ const Notes = ({ notes: { note, notes, loading } }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCurrentUsersNotes())
-
   }, [getCurrentUsersNotes, notes])
 
   return (

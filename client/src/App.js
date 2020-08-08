@@ -9,6 +9,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import setAuthToken from './utils/setAuthToken'
 import { loadUser } from './actions/auth'
+import PrivateRoute from './components/PrivateRoute';
 
 
 if (localStorage.token) {
@@ -30,7 +31,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Switch>
             {/* TODO: make note route private */}
-            <Route exact path='/notes' component={Notes} />
+            <PrivateRoute exact path='/notes' component={Notes} />
           </Switch>
         </div>
       </Router>

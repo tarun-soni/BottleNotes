@@ -3,7 +3,8 @@ import {
   NOTES_ERROR,
   CREATE_NOTE,
   UPDATE_NOTES,
-  DELETE_NOTE
+  DELETE_NOTE,
+  CLEAR_NOTES
 } from '../actions/types'
 
 const initialState = {
@@ -41,6 +42,13 @@ export default function (state = initialState, action) {
           )
         },
         notes: state.notes
+      }
+    case CLEAR_NOTES:
+      return {
+        ...state,
+        note: null,
+        notes: [],
+        loading: false,
       }
     default:
       return state;
