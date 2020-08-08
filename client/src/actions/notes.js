@@ -70,3 +70,29 @@ export const addNote = (dataFromUser) => async dispatch => {
     });
   }
 };
+
+// update note
+export const updateNote = (dataFromUser, noteid) => async dispatch => {
+  try {
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.put(`/api/note/${noteid}`, dataFromUser, config);
+
+    // window.alert("Note Udated");
+    dispatch({
+      type: UPDATE_NOTES,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log('err in update notes :>> ', err);
+    dispatch({
+      type: NOTES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

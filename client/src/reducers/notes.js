@@ -57,6 +57,11 @@ export default function (state = initialState, action) {
         notes: [payload, ...state.notes],
         loading: false,
       }
+    case UPDATE_NOTES:
+      return {
+        ...state,
+        notes: [state.notes]
+      }
     default:
       return state;
   }
