@@ -60,7 +60,7 @@ const Notes = ({ notes: { note, notes, loading } }) => {
         {loading ? <h1> loading.....</h1> :
           <>
             {notes.map(n => (
-              <NoteItem key={n._id} n={n} name={note.user.name} setnoteData={setnoteData} onChange={onChange} />
+              <NoteItem key={n._id} n={n} name={note.user.name} />
             ))}
           </>
         }
