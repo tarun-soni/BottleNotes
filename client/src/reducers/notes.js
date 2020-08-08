@@ -50,6 +50,13 @@ export default function (state = initialState, action) {
         notes: [],
         loading: false,
       }
+
+    case CREATE_NOTE:
+      return {
+        ...state,
+        notes: [payload, ...state.notes],
+        loading: false,
+      }
     default:
       return state;
   }

@@ -44,3 +44,29 @@ export const deleteNote = (noteid) => async dispatch => {
     });
   }
 };
+
+// Add note
+export const addNote = (dataFromUser) => async dispatch => {
+
+  try {
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post(`/api/note`, dataFromUser, config);
+
+    dispatch({
+      type: CREATE_NOTE,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log('err in add notes :>> ', err);
+    dispatch({
+      type: NOTES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

@@ -1,7 +1,7 @@
 
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { getCurrentUsersNotes } from '../../actions/notes'
+import { getCurrentUsersNotes, addNote } from '../../actions/notes'
 import './cssNotes.css'
 import NoteItem from './NoteItem'
 const Notes = ({ notes: { note, notes, loading } }) => {
@@ -12,29 +12,44 @@ const Notes = ({ notes: { note, notes, loading } }) => {
     dispatch(getCurrentUsersNotes())
   }, [getCurrentUsersNotes, notes])
 
+
+  const [noteData, setnoteData] = useState({
+    title: '',
+    desc: ''
+  })
+
+  const { title, desc } = noteData
+  const onChange = e => setnoteData({ ...noteData, [e.target.name]: e.target.value })
+
+  const onSubmit = e => {
+    e.preventDefault()
+    dispatch(addNote(noteData))
+  }
   return (
 
     <div className="main">
 
-
       <form className="inputFields"
-      >
+        onSubmit={e => onSubmit(e)}>
         <input
           type="text"
           placeholder="Title..."
-          name="email"
+          name="title"
+          value={title}
+          onChange={e => onChange(e)}
+
         />
 
 
         <input
           type="text"
           placeholder="description"
-          name="password"
-          minLength="6"
+          name="desc"
+          value={desc}
+          onChange={e => onChange(e)}
         />
         <input type="submit" className="btn" value="ADD Note" />
       </form>
-
 
       <div className="notes-container">
 
