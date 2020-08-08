@@ -53,3 +53,29 @@ height: 100vh;
   background: #343a40;
   color: #fff;
 }
+
+
+
+@media(max-width: 940px) {
+
+  .App{
+ width: 100%;
+  }
+
+  .navbar{
+    display: flex;
+    width: 100%;
+  }
+  .navbar ul {
+    display: flex;
+      list-style: none;
+      padding-right: 5em;
+
+  }
+  
+  .navbar a {
+    color: #fff;
+    padding-left: 5em;
+    }
+  
+}

@@ -126,7 +126,7 @@ input {
         flex-direction: column;
     }
 
-    form {
+    /* form {
         border-right: 0;
-    }
+    } */
 }
