@@ -10,6 +10,7 @@ import setAuthToken from './utils/setAuthToken'
 import { loadUser } from './actions/auth'
 import PrivateRoute from './components/PrivateRoute';
 import Nav from './components/Nav.js';
+import Register from './components/Login/Register';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -26,8 +27,9 @@ function App() {
       <Router>
         <div className="App" id="login-div">
           <Nav />
-          <Route exact path="/" component={Login} />
           <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/register" component={Register} />
             <PrivateRoute exact path='/notes' component={Notes} />
           </Switch>
         </div>

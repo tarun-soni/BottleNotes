@@ -54,7 +54,7 @@ const Login = ({ isAuthenticated }) => {
             />
           </div>
           <input type="submit" className="btn" value="Log In" />
-          <small>Don't have an account? <a href="#">Sign up</a></small>
+          <small>Don't have an account? <Link to={'/register'}>Sign up </Link></small>
         </form>
         <div className="features">
           <div className="feature">

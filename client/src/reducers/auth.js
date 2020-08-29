@@ -3,7 +3,7 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT, REGISTER_SUCCESS
 } from '../actions/types'
 
 const initialState = {
@@ -24,6 +24,7 @@ export default function (state = initialState, action) {
         user: payload
       }
     case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       localStorage.setItem('token', payload.token)
       return {
         ...state,

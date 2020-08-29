@@ -15,3 +15,6 @@ export const NOTES_ERROR = 'NOTES_ERROR';
 export const UPDATE_NOTES = 'UPDATE_NOTES';
 export const DELETE_NOTE = 'DELETE_NOTE';
 export const CLEAR_NOTES = 'CLEAR_NOTES';
+
+// Register
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

@@ -5,11 +5,41 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_NOTES
+  CLEAR_NOTES, REGISTER_SUCCESS
 } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
+//Register User
 
+export const register = (dataToRegister) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const { name, email, password } = dataToRegister
+  try {
+
+    const res = await axios.post('/api/users', dataToRegister, config)
+
+    dispatch({
+      type: REGISTER_SUCCESS,
+      payload: res.data
+    })
+    dispatch(loadUser())
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      console.log(errors);
+      errors.map(error => window.alert(error.msg))
+    }
+    dispatch({
+      type: LOGIN_FAIL
+    })
+  }
+
+}
 
 // LOGIN USER
 export const login = (dataFromUser) => async dispatch => {
