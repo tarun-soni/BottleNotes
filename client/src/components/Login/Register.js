@@ -64,7 +64,7 @@ const Register = ({ isAuthenticated }) => {
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="Enter password (min. length 6)"
                 name="password" autoComplete="new-password"
                 minLength="6"
                 value={password}

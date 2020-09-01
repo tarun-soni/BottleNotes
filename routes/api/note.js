@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const config = require('config');
+// const config = require('config');
 const auth = require('../../middleware/auth')
 const Notes = require('../../models/Notes')
 const User = require('../../models/User')
