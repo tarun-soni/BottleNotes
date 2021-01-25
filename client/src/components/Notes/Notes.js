@@ -3,9 +3,12 @@ import { connect, useDispatch } from "react-redux";
 import { getCurrentUsersNotes, addNote } from "../../actions/notes";
 import Homepage from "../DnD/Homepage";
 import "./cssNotes.css";
+import Switch from "react-switch";
+
 import NoteItem from "./NoteItem";
 const Notes = ({ notes: { note, notes, loading } }) => {
   const dispatch = useDispatch();
+  const [switchChecked, setSwitchChecked] = useState(false);
 
   useEffect(() => {
     dispatch(getCurrentUsersNotes());
@@ -30,7 +33,12 @@ const Notes = ({ notes: { note, notes, loading } }) => {
   };
   return (
     <div className="main">
-      <form className="inputFields" onSubmit={(e) => onSubmit(e)}>
+      <form
+        className={
+          !switchChecked ? "inputFields inputFields-notes-mode" : "inputFields"
+        }
+        onSubmit={(e) => onSubmit(e)}
+      >
         <input
           type="text"
           placeholder="Title..."
@@ -48,17 +56,20 @@ const Notes = ({ notes: { note, notes, loading } }) => {
         />
         <input type="submit" className="btn" value="ADD Note" />
       </form>
-
-      <div className="notes-container">
+      <div style={{ display: "block" }}>
+        <span>Trello / Timeline mode</span>
+        <Switch
+          onChange={() => setSwitchChecked(!switchChecked)}
+          checked={switchChecked}
+        />
+      </div>
+      <div className={!switchChecked && "notes-container "}>
         {loading ? (
           <h1> loading.....</h1>
+        ) : switchChecked ? (
+          <Homepage data={notes} />
         ) : (
-          <>
-            <Homepage data={notes} />
-            {/* {notes.map((n) => (
-              <NoteItem key={n._id} n={n} name={note.user.name} />
-            ))} */}
-          </>
+          notes.map((n) => <NoteItem key={n._id} n={n} name={note.user.name} />)
         )}
       </div>
     </div>

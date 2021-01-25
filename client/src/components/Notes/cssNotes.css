@@ -1,4 +1,4 @@
-.notes-container  {
+.notes-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
@@ -8,7 +8,6 @@
   margin: auto;
   margin-top: 50px;
 }
-
 
 .note {
   background-color: #fff;
@@ -28,7 +27,7 @@
 .note-body {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   padding: 20px;
   min-height: 250px;
 }
@@ -42,64 +41,57 @@
   margin: 0 0 40px;
 }
 
-
 .user {
   display: flex;
   margin-top: auto;
 }
 
-
 .user-info h5 {
   margin: 0;
 }
 
-.icon{
+.icon {
   margin-left: 95px;
 }
 
-.fa-pencil{
+.fa-pencil {
   margin-right: 20px;
 }
 
-
-.main{
+.main {
   margin-top: 130px;
   margin-bottom: 50px;
   max-height: 75%;
 }
 
-
-
-.inputFields{
+.inputFields {
   display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
-padding: 0 250px;
-}
-
-@media(max-width: 940px) {
-	.notes-container {
-    grid-template-columns: 1fr;
-    padding: 0 250px;
-  }
-  .main{
-    justify-content: center;
-  }
-
-  .inputFields{
-    display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  /* padding: 0 auto; */
+  padding: 0 500px;
 }
+
+.inputFields-notes-mode {
+  padding: 0 210px;
 }
 
+@media (max-width: 940px) {
+  .main {
+    justify-content: center;
+  }
 
-
-.modal-div{
+  .inputFields {
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 0 auto; */
+  }
+}
+
+.modal-div {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;

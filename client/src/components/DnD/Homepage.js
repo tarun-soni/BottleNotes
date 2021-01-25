@@ -7,14 +7,14 @@ import "./DnD.css";
 const Homepage = ({ data }) => {
   const [items, setItems] = useState(data);
   const onDrop = (item, monitor, status) => {
-    console.log("statuses :>> ", statuses);
-
     const mapping = statuses.find((si) => si.status === status);
 
     setItems((prevState) => {
       const newItems = prevState
         .filter((i) => i._id !== item._id)
         .concat({ ...item, status, icon: mapping.icon });
+
+      // const returnArray = newItems.reverse();
       return [...newItems];
     });
   };

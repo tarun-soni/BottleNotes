@@ -39,7 +39,7 @@ const Item = ({ item, index, moveItem, status }) => {
   const [{ isDragging }, drag] = useDrag({
     item: { type: ITEM_TYPE, ...item, index },
     collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
+      isDragging: !!monitor.isDragging(),
     }),
   });
 
