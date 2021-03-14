@@ -26,7 +26,7 @@ export const getCurrentUsersNotes = () => async (dispatch) => {
 // Delete note
 export const deleteNote = (noteid) => async (dispatch) => {
   try {
-    const res = await axios.delete(`/api/note/${noteid}`);
+    await axios.delete(`/api/note/${noteid}`);
 
     dispatch({
       type: DELETE_NOTE,
