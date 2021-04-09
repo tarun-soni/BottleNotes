@@ -1,39 +1,35 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect, useDispatch } from 'react-redux'
 
 import { register } from '../../actions/auth'
 const Register = ({ isAuthenticated }) => {
-
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   })
-  const { name, email, password } = formData;
+  const { name, email, password } = formData
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault()
     dispatch(register(formData))
   }
 
   if (isAuthenticated) {
-    return <Redirect to="/notes" />;
+    return <Redirect to="/notes" />
   }
 
-
   return (
-
     <>
-
       <div className="container">
         <div className="form-control">
-
-          <form onSubmit={e => onSubmit(e)}>
+          <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-control">
               <label htmlFor="Name">Name</label>
 
@@ -43,10 +39,9 @@ const Register = ({ isAuthenticated }) => {
                 name="name"
                 id="name"
                 value={name}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </div>
-
 
             <div className="form-control">
               <label htmlFor="email">Email</label>
@@ -56,7 +51,7 @@ const Register = ({ isAuthenticated }) => {
                 name="email"
                 value={email}
                 autoComplete="off"
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </div>
 
@@ -65,16 +60,15 @@ const Register = ({ isAuthenticated }) => {
               <input
                 type="password"
                 placeholder="Enter password (min. length 6)"
-                name="password" autoComplete="new-password"
+                name="password"
+                autoComplete="new-password"
                 minLength="6"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </div>
             <input type="submit" className="btn" value="Register" />
-
           </form>
-
         </div>
       </div>
     </>
@@ -83,10 +77,9 @@ const Register = ({ isAuthenticated }) => {
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool
-
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 })
 

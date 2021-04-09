@@ -5,22 +5,21 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_NOTES, REGISTER_SUCCESS
+  CLEAR_NOTES,
+  REGISTER_SUCCESS
 } from './types'
 import setAuthToken from '../utils/setAuthToken'
 
 //Register User
 
-export const register = (dataToRegister) => async dispatch => {
+export const register = (dataToRegister) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
 
-  const { name, email, password } = dataToRegister
   try {
-
     const res = await axios.post('/api/users', dataToRegister, config)
 
     dispatch({
@@ -29,20 +28,19 @@ export const register = (dataToRegister) => async dispatch => {
     })
     dispatch(loadUser())
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response.data.errors
     if (errors) {
-      console.log(errors);
-      errors.map(error => window.alert(error.msg))
+      console.log(errors)
+      errors.map((error) => window.alert(error.msg))
     }
     dispatch({
       type: LOGIN_FAIL
     })
   }
-
 }
 
 // LOGIN USER
-export const login = (dataFromUser) => async dispatch => {
+export const login = (dataFromUser) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -57,9 +55,9 @@ export const login = (dataFromUser) => async dispatch => {
     })
     dispatch(loadUser())
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response.data.errors
     if (errors) {
-      console.log('errors :>> ', errors);
+      console.log('errors :>> ', errors)
     }
     dispatch({
       type: LOGIN_FAIL
@@ -68,10 +66,10 @@ export const login = (dataFromUser) => async dispatch => {
 }
 
 //LOAD USER
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch) => {
   //check if there's a token
   if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    setAuthToken(localStorage.token)
   }
 
   try {
@@ -89,7 +87,7 @@ export const loadUser = () => async dispatch => {
 }
 
 //Logout
-export const logout = () => dispatch => {
-  dispatch({ type: CLEAR_NOTES });
-  dispatch({ type: LOGOUT });
-};
+export const logout = () => (dispatch) => {
+  dispatch({ type: CLEAR_NOTES })
+  dispatch({ type: LOGOUT })
+}
