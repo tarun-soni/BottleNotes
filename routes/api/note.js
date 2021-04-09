@@ -28,7 +28,7 @@ router.post(
       if (notes === null) {
         notes = new Notes({
           user: req.user.id,
-          notes: newNote,
+          notes: newNote
         });
         await notes.save();
         return res.json(notes);
@@ -50,7 +50,7 @@ router.post(
 router.get("/notes", auth, async (req, res) => {
   try {
     const notes = await Notes.findOne({ user: req.user.id }).populate("user", [
-      "name",
+      "name"
     ]);
 
     if (!notes) {
@@ -98,7 +98,6 @@ router.delete("/:note_id", auth, async (req, res) => {
   try {
     const note = await Notes.findOne({ user: req.user.id });
 
-    console.log("note.notes :>> ", note.notes);
     note.notes = note.notes.filter(
       (n) => n._id.toString() !== req.params.note_id
     );
