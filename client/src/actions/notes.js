@@ -75,7 +75,6 @@ export const updateNote = (dataFromUser, noteid) => async (dispatch) => {
     };
 
     const res = await axios.put(`/api/note/${noteid}`, dataFromUser, config);
-
     // window.alert("Note Udated");
     dispatch({
       type: UPDATE_NOTES,
