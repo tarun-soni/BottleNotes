@@ -45,7 +45,7 @@ const Nav = ({ auth: { isAuthenticated, isLoading } }) => {
         <h1>
           <Link to="/"> BottleNotes</Link>
         </h1>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           {size.width > 768 ? (
             <>
               <span style={{ color: 'white', margin: '0 1rem' }}>

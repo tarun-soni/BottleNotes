@@ -36,6 +36,7 @@ export default function CustomModal(props) {
       </div>
 
       <form onSubmit={props.onSubmit}>
+        <p>Both fields are required</p>
         <input
           type="text"
           value={props.newValue.title}
