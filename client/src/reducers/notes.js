@@ -4,16 +4,17 @@ import {
   CREATE_NOTE,
   UPDATE_NOTES,
   DELETE_NOTE,
-  CLEAR_NOTES
+  CLEAR_NOTES,
+  UPDATE_SWITCH
 } from '../actions/types'
 
 const initialState = {
   note: null,
   notes: [],
   loading: true,
-  error: {}
+  error: {},
+  switchState: false
 }
-
 
 export default function (state = initialState, action) {
   const { type, payload } = action
@@ -37,9 +38,7 @@ export default function (state = initialState, action) {
         ...state,
         notes: {
           ...state.note,
-          notes: state.notes.filter(
-            n => n._id !== payload
-          )
+          notes: state.notes.filter((n) => n._id !== payload)
         },
         notes: state.notes
       }
@@ -48,21 +47,26 @@ export default function (state = initialState, action) {
         ...state,
         note: null,
         notes: [],
-        loading: false,
+        loading: false
       }
 
     case CREATE_NOTE:
       return {
         ...state,
         notes: [payload, ...state.notes],
-        loading: false,
+        loading: false
       }
     case UPDATE_NOTES:
       return {
         ...state,
         notes: [state.notes]
       }
+    case UPDATE_SWITCH:
+      return {
+        ...state,
+        switchState: payload
+      }
     default:
-      return state;
+      return state
   }
 }

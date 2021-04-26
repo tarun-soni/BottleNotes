@@ -2,8 +2,8 @@
   --primary-color: rgb(62, 100, 255);
   --complete-color: #27aa80;
   --text-color: #172b4d;
-  --disabled-color: #fad6d6;
-  --background-color: #f5eaea;
+  --disabled-color: #a3bfdf;
+  --background-color: #c4cee4;
 }
 
 a {
@@ -43,7 +43,7 @@ button.active {
 }
 
 button.active:after {
-  content: "";
+  content: '';
   display: block;
   margin: 0 auto;
   width: 50%;
@@ -64,6 +64,7 @@ select {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin: 1rem 4rem;
 }
 
 .item {
@@ -96,7 +97,7 @@ select {
 
 .drop-wrapper {
   flex: 1 25%;
-  width: 100%;
+  width: 80%;
   height: 100%;
 }
 
@@ -123,7 +124,7 @@ select {
 }
 
 .highlight-region {
-  background-color: rgb(230, 223, 223);
+  background-color: rgb(152, 166, 190);
 }
 
 .page-header {

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import setAuthToken from './utils/setAuthToken'
 import { loadUser } from './actions/auth'
 import PrivateRoute from './components/PrivateRoute'
-import Nav from './components/Nav.js'
+import Nav from './components/Nav/Nav.js'
 import Register from './components/Login/Register'
 
 import { DndProvider } from 'react-dnd'
@@ -28,8 +28,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <DndProvider backend={HTML5Backend}>
-          <div className="App" id="login-div">
-            <Nav />
+          <Nav />
+          <div className="App">
             <Switch>
               <Route exact path="/" component={Login} />
               <Route exact path="/register" component={Register} />

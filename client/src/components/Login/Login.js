@@ -12,25 +12,25 @@ const Login = ({ isAuthenticated }) => {
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'u1@example.com',
+    password: '121212'
   })
 
   const { email, password } = formData
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-  const onSubmit = async e => {
-    e.preventDefault();
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onSubmit = async (e) => {
+    e.preventDefault()
     dispatch(login(formData))
   }
   if (isAuthenticated) {
-    return <Redirect to="/notes" />;
+    return <Redirect to="/notes" />
   }
-
 
   return (
     <>
       <div className="container">
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={(e) => onSubmit(e)}>
           <div className="form-control">
             <label htmlFor="email">Email</label>
             <input
@@ -38,7 +38,7 @@ const Login = ({ isAuthenticated }) => {
               placeholder="Enter your email"
               name="email"
               value={email}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             />
           </div>
 
@@ -50,11 +50,13 @@ const Login = ({ isAuthenticated }) => {
               name="password"
               minLength="6"
               value={password}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             />
           </div>
           <input type="submit" className="btn" value="Log In" />
-          <small>Don't have an account? <Link to={'/register'}>Sign up </Link></small>
+          <small>
+            Don't have an account? <Link to={'/register'}>Sign up </Link>
+          </small>
         </form>
         <div className="features">
           <div className="feature">
@@ -67,7 +69,6 @@ const Login = ({ isAuthenticated }) => {
             <h3>Sign up and Login</h3>
             <p>Login to see and edit all notes.</p>
           </div>
-
         </div>
       </div>
     </>
@@ -75,10 +76,10 @@ const Login = ({ isAuthenticated }) => {
 }
 Login.propTypes = {
   isAuthenticated: PropTypes.bool
-};
+}
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
-});
+})
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Login)

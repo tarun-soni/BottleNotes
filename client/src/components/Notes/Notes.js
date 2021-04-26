@@ -3,15 +3,18 @@ import { connect, useDispatch } from 'react-redux'
 import { getCurrentUsersNotes, addNote } from '../../actions/notes'
 import Homepage from '../DnD/Homepage'
 import './cssNotes.css'
-import Switch from 'react-switch'
-
+import {
+  Container as FloatingContainer,
+  Button as FloatingButton
+} from 'react-floating-action-button'
 import NoteItem from './NoteItem'
-const Notes = ({ notes: { note, notes, loading } }) => {
-  const dispatch = useDispatch()
-  const [switchChecked, setSwitchChecked] = useState(false)
 
+import CustomModal from '../CustomModal'
+const Notes = ({ notes: { note, notes, loading, switchState } }) => {
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCurrentUsersNotes())
+
     // }, [getCurrentUsersNotes, notes, dispatch])
   }, [notes, dispatch])
 
@@ -20,9 +23,7 @@ const Notes = ({ notes: { note, notes, loading } }) => {
     desc: ''
   })
 
-  const { title, desc } = noteData
-  const onChange = (e) =>
-    setnoteData({ ...noteData, [e.target.name]: e.target.value })
+  const [modalIsOpen, setIsOpen] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -31,55 +32,44 @@ const Notes = ({ notes: { note, notes, loading } }) => {
       title: '',
       desc: ''
     })
+    setIsOpen(false)
   }
   return (
-    <div className="main">
-      <form
-        className={
-          !switchChecked ? 'inputFields inputFields-notes-mode' : 'inputFields'
-        }
-        onSubmit={(e) => onSubmit(e)}
-      >
-        <input
-          type="text"
-          placeholder="Title..."
-          name="title"
-          value={title}
-          onChange={(e) => onChange(e)}
-        />
-
-        <input
-          type="text"
-          placeholder="description"
-          name="desc"
-          value={desc}
-          onChange={(e) => onChange(e)}
-        />
-        <input type="submit" className="btn" value="ADD Note" />
-      </form>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <span style={{ padding: '0 1rem' }}>Trello / Timeline mode</span>
-        <Switch
-          onChange={() => setSwitchChecked(!switchChecked)}
-          checked={switchChecked}
-        />
-      </div>
-      <div className={!switchChecked && 'notes-container '}>
-        {loading ? (
-          <h1> loading.....</h1>
-        ) : switchChecked ? (
-          <Homepage data={notes} />
-        ) : (
-          notes.map((n) => <NoteItem key={n._id} n={n} name={note.user.name} />)
+    <>
+      <div className="main">
+        {modalIsOpen && (
+          <CustomModal
+            modalIsOpen={modalIsOpen}
+            newValue={noteData}
+            setnewValues={setnoteData}
+            onSubmit={onSubmit}
+            setIsOpen={setIsOpen}
+            add
+          />
         )}
+
+        <div className={!switchState && 'notes-container '}>
+          {loading ? (
+            <h1> loading.....</h1>
+          ) : switchState ? (
+            <Homepage data={notes} />
+          ) : (
+            notes.map((n) => (
+              <NoteItem key={n._id} n={n} name={note.user.name} />
+            ))
+          )}
+        </div>
       </div>
-    </div>
+
+      <FloatingContainer>
+        <FloatingButton
+          tooltip="Add Transaction"
+          onClick={() => setIsOpen(true)}
+        >
+          <AddSvg />
+        </FloatingButton>
+      </FloatingContainer>
+    </>
   )
 }
 
@@ -88,3 +78,16 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(Notes)
+const AddSvg = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+    >
+      <title>add</title>
+      <path d="M16 9h-5V4H9v5H4v2h5v5h2v-5h5V9z" />
+    </svg>
+  )
+}
