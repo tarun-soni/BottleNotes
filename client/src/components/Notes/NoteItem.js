@@ -29,7 +29,8 @@ const NoteItem = ({ n, name }) => {
         <div className="note-body">
           <h4>{n.title}</h4>
           <p>{n.desc}</p>
-          <div className="user">
+          <h5>STATUS: {n?.status}</h5>
+          <div className="user" style={{ margin: '1rem 0' }}>
             <div className="user-info">
               <h5>created by {name}</h5>
             </div>

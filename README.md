@@ -1,21 +1,25 @@
-## BottleNotes - MERN + Redux
+![title](./readme_assets/title.svg)
+
+## BottleNotes and Trello D&D - MERN + Redux
+
 #### Note taking and storing web app
 
-
 #### Made using :
+
     1. MongoDB
     2. ExpressJS
     3. React + Redux
     4. jwt
     5. bcryptjs
-    
-#### IN config/default.json add following
-    "mongoURI": "YOUR_MONGO_URI",
-    "jwtSecret": "yoursecret",
+    6. react-dnd
+    7. react-dnd-html5-backend
 
-![alt text](https://imgur.com/glY7Etn.png)
+#### View Live
 
-![alt text](https://imgur.com/B32vu14.png)
+[bottle-notes.herokuapp.com](https://bottle-notes.herokuapp.com)
 
-![alt text](https://imgur.com/69mAqdW.png)
+---
 
+## Working
+
+![working](./readme_assets/readmeGIF.gif)
